@@ -4,11 +4,12 @@ from alc_scc_decomposed import AlcSccDecomposed
 import sys, time, datetime
 
 
+
 def main():
     try:
         graph_file = sys.argv[1]
         # For DFS recursion is very high
-        sys.setrecursionlimit(10**6)
+
     except:
         graph_file = 'V5kD5L8exp.edge'
     start_time = time.time()
@@ -41,5 +42,7 @@ def main():
     average = sum(false_answer_times) / len(false_answer_times)
     print('Average time for false queries {}'.format(average))
 
+
 if __name__ == '__main__':
+    sys.setrecursionlimit(10 ** 6)
     main()
