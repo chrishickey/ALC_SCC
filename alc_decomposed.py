@@ -7,6 +7,7 @@ class AlcDecomposed(object):
         self.unlabeledGraphs = {i: UnlabeledGraph() for j in range(1, len(label_set)+1)
                                     for i in combinations(label_set, j)}
 
+
     @classmethod
     def decompose_labeled_graph(cls, labeled_graph):
         decomposed_graph = AlcDecomposed(labeled_graph.label_set)

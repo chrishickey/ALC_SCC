@@ -1,4 +1,5 @@
 from collections import defaultdict
+from scc_decomposed import SccDecomposedGraph
 LOG = False
 
 class UnlabeledGraph(object):
@@ -15,47 +16,58 @@ class UnlabeledGraph(object):
 
     def scc_decompose(self):
         stack = []
-        node_keys = [*self.graph]
-        visited = [False] * len(node_keys)
-        print(node_keys)
-        for i in range(len(node_keys)):
+        visited = {vertex: False for vertex in self.graph}
+        for i in self.graph:
             if visited[i] == False:
-                self.fill_order(i, visited, stack, node_keys)
+                self.fill_order(i, visited, stack)
 
         gr = self._get_transpose()
-        print(gr.graph)
-        print(stack)
 
         # Mark all the vertices as not visited (For second DFS)
-        visited = [False] * len(node_keys)
+        visited = {vertex: False for vertex in self.graph}
 
         # Now process all vertices in order defined by Stack
+        scc_decomposition = SccDecomposedGraph(self.graph)
+        scc = []
+        sccs = []
+        scc_out_portals = []
         while stack:
             i = stack.pop()
             if visited[i] == False:
-                gr.DFSUtil(i, visited, node_keys)
-                print()
+                gr.DFSUtil(i, visited, scc)
+                out_vertices = self.get_out_vertices(scc)
+                sccs.append(scc)
+                scc_out_portals.append(out_vertices)
+                scc = []
+        scc_decomposition.setup(sccs, scc_out_portals)
+        return scc_decomposition
 
+    def get_out_vertices(self, scc):
+        out_vertices = []
+        for vertex in scc:
+            for v in self.graph[vertex]:
+                if v not in scc:
+                    out_vertices.append(v)
+        return out_vertices
 
     # A function used by DFS
-    def DFSUtil(self, v, visited, node_keys):
+    def DFSUtil(self, v, visited, scc):
         # Mark the current node as visited and print it
         visited[v] = True
-        print(node_keys[v])
-
+        scc.append(v)
         # Recur for all the vertices adjacent to this vertex
         for i in self.graph[v]:
-            if visited[node_keys.index(i)] == False:
-                self.DFSUtil(node_keys.index(i), visited, node_keys)
+            if visited[i] == False:
+                self.DFSUtil(i, visited, scc)
 
-    def fill_order(self, v, visited, stack, node_keys):
+    def fill_order(self, v, visited, stack):
         # Mark the current node as visited
         visited[v] = True
         # Recur for all the vertices adjacent to this vertex
         for i in self.graph[v]:
-            if visited[node_keys.index(i)] == False:
-                self.fill_order(node_keys.index(i), visited, stack, node_keys)
-        stack = stack.append(v)
+            if visited[i] == False:
+                self.fill_order(i, visited, stack)
+        stack.append(v)
         # Function that returns reverse (or transpose) of this graph
 
     def _get_transpose(self):
@@ -64,6 +76,3 @@ class UnlabeledGraph(object):
             for j in self.graph[i]:
                 g.add_edge(j, i)
         return g
-
-        # The main function that finds and prints all strongly
-
