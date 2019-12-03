@@ -17,6 +17,8 @@ class SccDecomposedGraph:
                     self.scc_graph[scc_id].append(self.vertex_to_scc_dict[vertex])
 
     def reachability_query(self, s, t):
+        if s not in self.vertex_to_scc_dict or t not in self.vertex_to_scc_dict:
+            return False
         s_sccid, t_sccid = self.vertex_to_scc_dict[s], self.vertex_to_scc_dict[t]
         queue = []
         queue.append(s_sccid)

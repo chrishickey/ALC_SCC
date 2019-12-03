@@ -1,3 +1,4 @@
+import random
 class LabeledGraph(object):
 
     def __init__(self):
@@ -19,6 +20,35 @@ class LabeledGraph(object):
                 source, target, label = line.split()
                 graph.add_edge(source, target, label)
         return graph
+
+    def get_test_cases(self, number=50, label_size=4):
+        true_test_cases = []
+        false_test_cases = []
+        while len(true_test_cases) < number or len(false_test_cases) < number:
+            labels = random.sample(self.label_set, label_size)
+            source, target = random.sample(self.vertices.keys(), 2)
+            original_source = source
+            if ((source, target, tuple(sorted(labels))) in true_test_cases) or \
+                    ((source, target, tuple(sorted(labels))) in false_test_cases):
+                continue
+            queue = [source]
+            visited = {id: False for id in self.vertices}
+            not_false = False
+            while queue:
+                source = queue.pop(0)
+                visited[source] = True
+                if source == target:
+                    if len(true_test_cases) < number:
+                        true_test_cases.append((original_source, target, tuple(sorted(labels))))
+                    not_false = True
+                    break
+                for vertex in self.vertices[source].edges:
+                    if vertex[0] in visited and visited[vertex[0]] == False and vertex[1] in labels:
+                        queue.append(vertex[0])
+            if len(false_test_cases) >= number or not_false:
+                continue
+            false_test_cases.append((original_source, target, tuple(sorted(labels))))
+        return true_test_cases, false_test_cases
 
 
 class Vertex(object):
