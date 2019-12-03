@@ -10,7 +10,7 @@ def main():
         # For DFS recursion is very high
         sys.setrecursionlimit(10**6)
     except:
-        graph_file = 'graph.txt'
+        graph_file = 'V5kD5L8exp.edge'
     start_time = time.time()
     labeled_graph = LabeledGraph.get_graph_from_file(graph_file)
     ttc, ftc = labeled_graph.get_test_cases(label_size=2, number=1000)
