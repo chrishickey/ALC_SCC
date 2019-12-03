@@ -4,7 +4,6 @@ class SccDecomposedGraph:
     def __init__(self, vertices):
         self.vertex_to_scc_dict = {vertex: None for vertex in vertices}
         self.scc_graph = {}
-        self.scc_counter = 0
 
     def setup(self, sccs, out_vertices):
         for scc_id in range(len(sccs)):

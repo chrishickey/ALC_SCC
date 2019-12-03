@@ -1,20 +1,23 @@
 from collections import defaultdict
 from scc_decomposed import SccDecomposedGraph
-LOG = False
+LOG = True
 
 class UnlabeledGraph(object):
 
-    def __init__(self):
+    def __init__(self, label_set=None):
         self.graph = defaultdict(list)
+        self.label_set = label_set
 
     def add_edge(self, u, v):
-        if LOG:
-            print('Adding edge {}->{} to unlabeled graph {}'.format(u, v))
+        if LOG and self.label_set:
+            print('Adding edge {}->{} to unlabeled graph {}'.format(u, v, self.label_set))
         self.graph[u].append(v)
         if v not in self.graph:
             self.graph[v] = []
 
     def scc_decompose(self):
+        if LOG:
+            print('Graph before decomposition for label set {} is {}'.format(self.label_set, self.graph))
         stack = []
         visited = {vertex: False for vertex in self.graph}
         for i in self.graph:
@@ -39,6 +42,8 @@ class UnlabeledGraph(object):
                 sccs.append(scc)
                 scc_out_portals.append(out_vertices)
                 scc = []
+        if LOG:
+            print('With label set {} the SCCs are {}'.format(self.label_set, sccs))
         scc_decomposition.setup(sccs, scc_out_portals)
         return scc_decomposition
 

@@ -4,7 +4,7 @@ from unlabeled_graph import UnlabeledGraph
 class AlcDecomposed(object):
 
     def __init__(self, label_set):
-        self.unlabeledGraphs = {i: UnlabeledGraph() for j in range(1, len(label_set)+1)
+        self.unlabeledGraphs = {tuple(sorted(i)): UnlabeledGraph(tuple(sorted(i))) for j in range(1, len(label_set)+1)
                                     for i in combinations(label_set, j)}
 
 

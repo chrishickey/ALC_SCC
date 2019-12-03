@@ -23,5 +23,14 @@ def main():
     test3_answer = alc_scc_decomposed_graph.lcr_query(2, 7, (1,))
     print('Expected test 3 False=={}'.format(test3_answer))
 
+    test4_answer = alc_scc_decomposed_graph.lcr_query(6, 4, (1, 2))
+    print('Expected test 4 True=={}'.format(test4_answer))
+
+    test5_answer = alc_scc_decomposed_graph.lcr_query(6, 2, (0, 1))
+    print('Expected test 5 False=={}'.format(test5_answer))
+
+    print(alc_scc_decomposed_graph.alc_scc_decomposed_graphs[(0,1, 2)].scc_graph)
+
+
 if __name__ == '__main__':
     main()
