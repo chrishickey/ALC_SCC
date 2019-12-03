@@ -27,8 +27,6 @@ def main():
         answer = alc_scc_decomposed_graph.lcr_query(source, target, query_set)
         end = datetime.datetime.now()
         assert answer == True
-        start = datetime.datetime.now()
-        end = datetime.datetime.now()
         true_answer_times.append((start - end).microseconds)
     average = sum(true_answer_times) / len(true_answer_times)
     print('Average time for true queries {}'.format(average))
@@ -39,8 +37,6 @@ def main():
         answer = alc_scc_decomposed_graph.lcr_query(source, target, query_set)
         end = datetime.datetime.now()
         assert answer == False
-        start = datetime.datetime.now()
-        end = datetime.datetime.now()
         false_answer_times.append((start - end).microseconds)
     average = sum(false_answer_times) / len(false_answer_times)
     print('Average time for false queries {}'.format(average))
