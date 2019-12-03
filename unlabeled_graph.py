@@ -1,6 +1,6 @@
 from collections import defaultdict
 from scc_decomposed import SccDecomposedGraph
-LOG = True
+LOG = 0
 
 class UnlabeledGraph(object):
 

@@ -1,4 +1,4 @@
-LOG = True
+LOG = 0
 class AlcSccDecomposed(object):
 
     def __init__(self, unlabeled_graphs):
