@@ -10,7 +10,7 @@ def main():
         # For DFS recursion is very high
         sys.setrecursionlimit(10**6)
     except:
-        graph_file = 'V5D5L8exp.txt'
+        graph_file = 'V5D5L8exp.edge'
     start_time = time.time()
     labeled_graph = LabeledGraph.get_graph_from_file(graph_file)
     alc_decomposed_graph = AlcDecomposed.decompose_labeled_graph(labeled_graph)
