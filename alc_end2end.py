@@ -10,7 +10,7 @@ def main():
         # For DFS recursion is very high
         sys.setrecursionlimit(10**6)
     except:
-        graph_file = 'V5D5L8exp.edge'
+        graph_file = 'graph.txt'
     start_time = time.time()
     labeled_graph = LabeledGraph.get_graph_from_file(graph_file)
     alc_decomposed_graph = AlcDecomposed.decompose_labeled_graph(labeled_graph)
@@ -32,6 +32,12 @@ def main():
 
     test5_answer = alc_scc_decomposed_graph.lcr_query(6, 2, (0, 1))
     print('Expected test 5 False=={}'.format(test5_answer))
+
+    test6_answer = alc_scc_decomposed_graph.lcr_query(9, 7, (0, 1, 2))
+    print('Expected test 6 False=={}'.format(test6_answer))
+
+    test7_answer = alc_scc_decomposed_graph.lcr_query(6, 1, (0, 1, 2))
+    print('Expected test 6 True=={}'.format(test7_answer))
 
     print('Total number of constructed graphs {}'.format(len(alc_scc_decomposed_graph.alc_scc_decomposed_graphs)))
 
