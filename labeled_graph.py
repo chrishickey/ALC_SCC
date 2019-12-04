@@ -40,6 +40,8 @@ class LabeledGraph(object):
                 if source == target:
                     if len(true_test_cases) < number:
                         true_test_cases.append((original_source, target, tuple(sorted(labels))))
+                        if not len(true_test_cases) % 100:
+                            print('Found {} True test cases'.format(len(true_test_cases)))
                     not_false = True
                     break
                 for vertex in self.vertices[source].edges:
@@ -48,6 +50,8 @@ class LabeledGraph(object):
             if len(false_test_cases) >= number or not_false:
                 continue
             false_test_cases.append((original_source, target, tuple(sorted(labels))))
+            if not len(false_test_cases) % 100:
+                print('Found {} False test cases'.format(len(false_test_cases)))
         return true_test_cases, false_test_cases
 
 

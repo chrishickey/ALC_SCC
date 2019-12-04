@@ -1,7 +1,6 @@
-LOG = 0
 import os
 from collections import defaultdict
-
+LOG = 0
 
 class AlcSccDecomposed(object):
 

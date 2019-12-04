@@ -3,7 +3,7 @@ from alc_decomposed import AlcDecomposed
 from alc_scc_decomposed import AlcSccDecomposed
 import sys, time, datetime
 TEST_LABEL_SIZE = 6
-TEST_SET_SIZE = 1000
+TEST_SET_SIZE = 2000
 
 
 def main():
